@@ -51,32 +51,33 @@ Quicksight security group = sg-xxxx
 
 新建一个DMS任务，指定好source & target & replication instance & mapping table （schema name: lab）  
 当status为Load complete时，DMS任务执行完毕，检查table loaded这一栏应为1，full load rows为41188.
-
-
-步骤4： Quicksight数据可视化
-
+   
+   
+   
+步骤4： Quicksight数据可视化   
+   
 右上角切换Quicksight区域到指定区域如Oregon, 测试从Aurora或者redshift加载数据。  
 因为Aurora和redshift均在私有子网当中，因此首先需要给Quicksight加一个VPC connection。    
-
+   
 
 1. 添加VPC connection   
 
-右上角选择用户名---下拉tab:manage quicksight --- 左侧tab:manage VPC connections --add VPC connection   
-选择VPC ID和output当中的Quicksight security group，以创建VPC连接   
+	右上角选择用户名---下拉tab:manage quicksight --- 左侧tab:manage VPC connections --add VPC connection   
+	选择VPC ID和output当中的Quicksight security group，以创建VPC连接   
 
-注：
-（1）如没有mange VPC connections的选项，需要先开启enterprise版本  
-（2）这里Quicksight的端口为全开，因此aurora和redshift均可以使用这一安全组做连接。实际生产请开启自己需要的端口。 
+	注:   
+	（1）如没有mange VPC connections的选项，需要先开启enterprise版本  
+	（2）这里Quicksight的端口为全开，因此aurora和redshift均可以使用这一安全组做连接。实际生产请开启自己需要的端口。 
 
 
 2. 数据可视化   
 
-选择Aurora或redshift实例为数据源，选择刚才创建的vpc connection. database name: lab。输入用户名密码（在output当中）  
+	选择Aurora或redshift实例为数据源，选择刚才创建的vpc connection. database name:lab。输入用户名密码（在output当中）  
 
-validate确保connectivity没问题后，即可创建。   
+	validate确保connectivity没问题后，即可创建。   
 
-左侧可以看到age, job, marital这几栏。任意拖拽数据栏生成自己的dashboard
-
+	左侧可以看到age, job, marital这几栏。任意拖拽数据栏生成自己的dashboard
+    
 
 
 步骤5:  销毁资源

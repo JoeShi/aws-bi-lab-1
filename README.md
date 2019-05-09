@@ -4,6 +4,7 @@
 
 ## 架构图
 
+![](dms.png)
 
 ## 实验前提
 
@@ -76,10 +77,10 @@ Quicksight security group = sg-xxxx
 
 	validate确保connectivity没问题后，即可创建。   
 
-	左侧可以看到age, job, marital这几栏。任意拖拽数据栏生成自己的dashboard
-    
+	左侧可以看到age, job, marital这几栏。任意拖拽数据栏生成自己的dashboard   
+   
 
-
+   
 步骤5:  销毁资源
 
 ```

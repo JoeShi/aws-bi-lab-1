@@ -12,7 +12,7 @@ resource "aws_security_group" "bastion_security_group" {
 }
 
 
-#0-22端口？？
+#0-22端口
 resource "aws_security_group_rule" "bastion_security_group_rule" {
   from_port = 0
   protocol = "tcp"

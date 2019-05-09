@@ -6,11 +6,11 @@ variable "vpc_id" {
   default = "vpc-0239816d3b197fe0a"
 }
 
+#db subnet, better private subnet
 variable "db_subnet_id_1" {
   default = "subnet-0d9096a4d1f816ad3"
 }
 
-#have to be PUBLIC subnet
 variable "db_subnet_id_2" {
   default = "subnet-0671e41af1ff9b91a"
 }

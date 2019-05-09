@@ -62,7 +62,7 @@ resource "aws_security_group_rule" "redshift_security_group_rule_dms" {
 }
 
 
-# redshift add quicksight 
+# redshift add quicksight rule
 
 resource "aws_security_group_rule" "redshift_security_group_rule_quicksight" {
   from_port = 0

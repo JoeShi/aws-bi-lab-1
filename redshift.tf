@@ -61,6 +61,33 @@ resource "aws_security_group_rule" "redshift_security_group_rule_dms" {
   type = "ingress"
 }
 
+
+# redshift add quicksight 
+
+resource "aws_security_group_rule" "redshift_security_group_rule_quicksight" {
+  from_port = 0
+  protocol = "tcp"
+  security_group_id = "${aws_security_group.redshift_security_group.id}"
+  to_port =  65535
+  source_security_group_id = "${aws_security_group.quicksight_security_group.id}"
+  type = "ingress"
+}
+
+
+
+# quicksight resource security rule
+# inbound add redshift
+resource "aws_security_group_rule" "redshift_rule_quicksight" {
+  from_port = 0
+  protocol = "tcp"
+  security_group_id = "${aws_security_group.quicksight_security_group.id}"
+  to_port = 65535
+  source_security_group_id = "${aws_security_group.redshift_security_group.id}"
+  type = "ingress"
+}
+
+
+
 resource "aws_redshift_cluster" "redshift_cluster" {
   cluster_identifier = "${random_string.redshift_cluster_identifier.result}"
   node_type = "dc1.large"
@@ -73,6 +100,7 @@ resource "aws_redshift_cluster" "redshift_cluster" {
   cluster_subnet_group_name = "${aws_redshift_subnet_group.redshift_subnet_group.name}"
   skip_final_snapshot = true
   final_snapshot_identifier = "delete-delete-me"
+  publicly_accessible = false
 }
 
 

@@ -23,6 +23,24 @@ resource "aws_security_group" "rds_db_security_group" {
   }
 }
 
+
+# add Quicksight resource security group
+# outbound
+resource "aws_security_group" "quicksight_security_group" {
+  vpc_id = "${data.aws_vpc.lab_vpc.id}"
+  egress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags {
+    Name = "quicksight SG"
+  }
+}
+
+
+
 resource "aws_security_group_rule" "rds_mysql_rule_bastion" {
   from_port = 3306
   protocol = "tcp"
@@ -40,6 +58,28 @@ resource "aws_security_group_rule" "rds_msyql_rule_dms" {
   source_security_group_id = "${aws_security_group.dms_security_group.id}"
   type = "ingress"
 }
+
+#Aurora : add quicksight rule
+resource "aws_security_group_rule" "rds_msyql_rule_quicksight" {
+  from_port = 3306
+  protocol = "tcp"
+  security_group_id = "${aws_security_group.rds_db_security_group.id}"
+  to_port = 3306
+  source_security_group_id = "${aws_security_group.quicksight_security_group.id}"
+  type = "ingress"
+}
+
+# quicksight resource security rule
+# inbound
+resource "aws_security_group_rule" "rds_mysql_rule_quicksight" {
+  from_port = 0
+  protocol = "tcp"
+  security_group_id = "${aws_security_group.quicksight_security_group.id}"
+  to_port = 65535
+  source_security_group_id = "${aws_security_group.rds_db_security_group.id}"
+  type = "ingress"
+}
+
 
 resource "random_string" "rds_cluster_parameter_group_name" {
   length = 8

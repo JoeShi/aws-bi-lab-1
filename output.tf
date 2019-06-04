@@ -45,3 +45,7 @@ output "DMS Aurora Source ID" {
 output "DMS RedShift Target ID" {
   value = "${aws_dms_endpoint.redshift_endpoint.endpoint_id}"
 }
+
+output "Quicksight security group" {
+  value = "${aws_security_group.quicksight_security_group.id}"
+}

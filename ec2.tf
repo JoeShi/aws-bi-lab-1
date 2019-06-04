@@ -11,6 +11,8 @@ resource "aws_security_group" "bastion_security_group" {
   }
 }
 
+
+#0-22端口
 resource "aws_security_group_rule" "bastion_security_group_rule" {
   from_port = 0
   protocol = "tcp"
@@ -31,7 +33,8 @@ data "template_file" "mysql_init" {
 
 # Launch a bastion machine
 resource "aws_instance" "bastion_instance" {
-  ami = "ami-061392db613a6357b"
+  #ami = "ami-061392db613a6357b"
+  ami = "${lookup(var.aws_amis, var.aws_region)}"
   instance_type = "m5.large"
   vpc_security_group_ids = ["${aws_security_group.bastion_security_group.id}"]
   subnet_id = "${data.aws_subnet.bastion_subnet.id}"

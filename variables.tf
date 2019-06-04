@@ -1,20 +1,32 @@
-
-variable "vpc_id" {
-  default = "vpc-5c1a8425"
+variable "aws_region" {
+	default = "us-west-2"
 }
 
+variable "vpc_id" {
+  default = "vpc-0239816d3b197fe0a"
+}
+
+#db subnet, better private subnet
 variable "db_subnet_id_1" {
-  default = "subnet-0449cd5614ac88c8a"
+  default = "subnet-0d9096a4d1f816ad3"
 }
 
 variable "db_subnet_id_2" {
-  default = "subnet-02c890faa2bc7e0c8"
+  default = "subnet-0671e41af1ff9b91a"
 }
 
 variable "bastion_subnet_id" {
-  default = "subnet-ebaa40a0"
+  default = "subnet-031f268c5856d86d2"
 }
 
 variable "ec2_key_name" {
-  default = "aws"
+  default = "aws-terraform"
+}
+
+
+# Amazon Linux AMI
+variable "aws_amis" {
+  default = {
+    us-west-2 = "ami-061392db613a6357b"
+  }
 }
